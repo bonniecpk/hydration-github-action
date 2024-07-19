@@ -10,6 +10,8 @@ subjects:
 - kind: User
   name: "user@example.com"
 - kind: User
+  name: "user2@example.com"
+- kind: User
   name: "bastion-sa@some-project.iam.gserviceaccount.com"
 - kind: Group
   name: "cluster-admin-group@example.com"
