@@ -1,0 +1,11 @@
+# This configures in-cluster (CoreDNS) DNS resolution.
+# Doc reference: https://cloud.devsite.corp.google.com/anthos/clusters/docs/bare-metal/1.15/how-to/cluster-dns
+apiVersion: networking.gke.io/v1alpha1
+kind: ClusterDNS
+metadata:
+  name: default
+spec:
+  upstreamNameservers:
+{% for ip in dns_servers.split(',')|map('trim') %}
+    - serverIP: {{ ip }}
+{% endfor %}

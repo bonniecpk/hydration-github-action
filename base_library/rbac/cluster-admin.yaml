@@ -1,0 +1,19 @@
+# Grants users cluster-admin access.  Users with connect gateway access still need
+# access to the cluster granted with Kubernetes RBAC.  The below grants
+# `cluster-admin`, which is highly privileged.  Modify this to your use case.
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gateway-cluster-admin
+subjects:
+- kind: User
+  name: "user@example.com"
+- kind: User
+  name: "bastion-sa@some-project.iam.gserviceaccount.com"
+- kind: Group
+  name: "cluster-admin-group@example.com"
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io

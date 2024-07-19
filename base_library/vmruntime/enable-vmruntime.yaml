@@ -1,0 +1,12 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VMRuntime
+metadata:
+  annotations:
+    client.lifecycle.config.k8s.io/mutation: ignore
+  name: vmruntime
+spec:
+  disableCDIUploadProxyVIP: true
+  enabled: true
+  evictionPolicy: {}
+  useEmulation: false
+  vmImageFormat: qcow2

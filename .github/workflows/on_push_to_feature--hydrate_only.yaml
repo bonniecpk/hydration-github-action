@@ -1,0 +1,23 @@
+name: hydrate resources (no PR; for feature branches)
+on:
+  push:
+    branches-ignore:
+    - main
+run-name: hydrate
+permissions: write-all
+
+jobs:
+  # generate and upload hydrated files
+  hydrate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: pip install -r cli/requirements.txt
+    - run: cli/hydrate.py -v --hydrated output/ --output-subdir=group source_of_truth.csv
+    - uses: actions/upload-artifact@v2
+      with:
+        name: hydrated-resources
+        path: output/*
